@@ -1,0 +1,13 @@
+h1 {
+  color: red; }
+
+#avatar__navbar {
+  width: 35px;
+  height: 35px; }
+
+.authentication a {
+  margin: 0 8px;
+  color: #dcdcdc; }
+  .authentication a:hover {
+    color: #ffffff;
+    text-decoration: none; }

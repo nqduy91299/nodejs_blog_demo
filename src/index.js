@@ -18,7 +18,7 @@ app.use(session({
     secret: 'secret-key-blog',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 60000 }
+    cookie: { maxAge: 600000 }
   }))
 
 app.use('/images',express.static(path.join(__dirname, 'public', 'img')));

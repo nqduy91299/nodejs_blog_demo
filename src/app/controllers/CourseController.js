@@ -1,5 +1,6 @@
 const Course = require('../Models/Course')
-const {mongooseToObject} = require('../../util/mongoose')
+const {mongooseToObject} = require('../../util/mongoose');
+const { youTubeIdGet } = require('../../util/youTube');
 
 class CourseController{
 
@@ -29,7 +30,9 @@ class CourseController{
     //[POST] /courses/store
     store(req, res, next){
         const obj = req.body;
+        obj.videoId = youTubeIdGet(obj.videoId);
         obj.image = `https://img.youtube.com/vi/${obj.videoId}/sddefault.jpg`
+        obj.createdBy = req.session?.user?._id
         const course = new Course(obj);
         course.save()
             .then(() => {
@@ -40,21 +43,23 @@ class CourseController{
     }
 
      // [GET] /courses/:id/edit
-     edit(req, res, next){
-        let user = '';
-        if(req.session?.user){
-            user = req.session?.user;
-        }
-         Course.findOne({_id: req.params.id})
-         .then((course) => {
+    edit(req, res, next){
+        const user = req.session?.user;
+
+        Course.findOne({_id: req.params.id, createdBy: user?._id})
+            .then((course) => {
             res.render('courses/edit',{course: mongooseToObject(course), user});
-         })
-        .catch(next);
+            })
+            .catch(next);
     }
 
     // [PUT] /courses/:id
     update(req, res, next){
-        Course.updateOne({_id: req.params.id}, req.body)
+        const obj = req.body;
+        obj.videoId = youTubeIdGet(obj.videoId);
+        obj.image = `https://img.youtube.com/vi/${obj.videoId}/sddefault.jpg`
+
+        Course.updateOne({_id: req.params.id}, obj)
             .then(() => {
                 res.redirect("/me/store/courses")
             })

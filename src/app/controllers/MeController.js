@@ -9,7 +9,7 @@ class CourseController{
         if(req.session?.user){
             user = req.session?.user;
         }
-        Promise.all([Course.find({}), Course.countDocumentsDeleted()])
+        Promise.all([Course.find({createdBy: user?._id}), Course.countDocumentsDeleted({createdBy: user?._id})])
         .then(([courses, countDeletedCourses]) => {
             res.render('me/stored-courses', {
                 courses: multipleMongooseToObject(courses), 
@@ -27,7 +27,7 @@ class CourseController{
         if(req.session?.user){
             user = req.session?.user;
         }
-        Course.findDeleted({})
+        Course.findDeleted({createdBy: user?._id})
         .then((course) => {
             res.render('me/bin-courses', {courses: multipleMongooseToObject(course), user})
         })

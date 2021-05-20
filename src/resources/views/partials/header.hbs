@@ -1,37 +1,44 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
     <div class="container">
         <a class="navbar-brand text-uppercase" href="/">Demo Blog</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-blog"
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-blog"
             aria-controls="navbar-blog" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-        {{#if user}}
-        <div class="collapse navbar-collapse" id="navbar-blog">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item dropdown active d-flex">
-                    <img src="/images/{{user.avatar}}" alt="avatar" class="rounded-circle" id="avatar__navbar">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{user.name}}
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/courses/create">Thêm Mới Khóa Học</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/me/store/courses">Khóa Học Của Tôi</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Bài Viết Của Tôi</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/logout">Đăng Xuất</a>
+            <div class="collapse navbar-collapse py-2 py-md-0" id="navbar-blog">
+                <a class="nav-link custom mb-2 mb-md-0 border-bottom" href="/blog">Blog</a>
+                <ul class="navbar-nav ml-auto">
+                {{#if user}}
+                    <li class="nav-item dropdown active d-flex">
+                        <img src="/images/{{user.avatar}}" alt="avatar" class="rounded-circle mr-2" id="avatar__navbar">
+                        <div class="w-100">
+                            <a class="nav-link dropdown-toggle" 
+                                    href="javascript:void(0);" 
+                                    id="navbarDropdown" 
+                                    role="button"
+                                    data-toggle="dropdown" 
+                                    aria-haspopup="true" 
+                                    aria-expanded="false">
+                                {{user.name}}
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="/courses/create">Thêm Mới Khóa Học</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/me/store/courses">Khóa Học Của Tôi</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Bài Viết Của Tôi</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">Đăng Xuất</a>
+                            </div>
+                        </div>
+                    </li>
+                {{else}}
+                    <div class="authentication">
+                        <a href="/login" class="nav-item">Đăng nhập</a>
+                        <a href="/register" class="nav-item">Đăng kí</a>
                     </div>
-                </li>
-            </ul>
-        </div>
-
-        {{else}}
-        <div class="authentication">
-            <a href="/login" class="nav-item">Đăng nhập</a>
-            <a href="/register" class="nav-item">Đăng kí</a>
-        </div>
-        {{/if}}
+                {{/if}}
+                </ul>
+            </div>
     </div>
 </nav>

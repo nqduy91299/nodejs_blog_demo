@@ -9,7 +9,8 @@ const Course = new Schema({
     image: {type: String},
     videoId: {type: String, required: true},
     level: {type: String},
-    slug: {type:String, slug: 'name', unique: true}
+    slug: {type:String, slug: 'name', unique: true},
+    createdBy: {type: mongoose.Types.ObjectId, required: true}
 }, {
     timestamps: true
 }) ;

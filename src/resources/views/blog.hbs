@@ -1,12 +1,14 @@
 <div class="row py-3 blog-page px-2">
     {{#each blogs}}
         <div class="col-12 blog-card border rounded border p-2 d-flex my-1">
-            <img class="rounded" src="/images/{{this.image}}" alt="">
-            <div class="ml-2">
+            <div class="img_area d-flex justify-content-center">
+                <img class="rounded" src="/images/{{this.image}}" alt="">
+            </div>
+            <div class="sub-card ml-2">
                 <div class="title ">
-                    <span class="font-weight-bold mr-3">
+                    <a class="font-weight-bold mr-3" href="/blog/{{this.slug}}">
                         {{this.title}}
-                    </span>
+                    </a>
                     <span class="font-italic">from {{this.createdBy.name}}</span>
                     <span class="font-italic">- {{dateTransform this.createdAt}}</span>
                 </div>

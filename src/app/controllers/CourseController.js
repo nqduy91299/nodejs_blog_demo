@@ -29,7 +29,11 @@ class CourseController{
         }
         Course.findOne({slug: req.params.slug}).populate('createdBy', '-password').select(["-__v"])
         .then((course) => {
-            res.render('courses/show', {course: mongooseToObject(course), user})
+            const notify = req.flash('notify');
+            res.render('courses/show', {
+                course: mongooseToObject(course), 
+                user,
+                notify: notify[0]})
         })
         .catch(next);
     }

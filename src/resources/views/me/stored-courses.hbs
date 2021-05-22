@@ -1,12 +1,12 @@
 <div class="mt-3">
-    <h1>Khóa học của tôi</h1>
+    <h1>Video của tôi</h1>
     <a href="/me/bin/courses">Thùng rác({{countDeletedCourses}})</a>
     <table class="table mt-3 table-striped">
         <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Tên khóa học</th>
-                <th scope="col">Cấp độ</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Ngày đăng</th>
                 <th scope="col">Mô tả</th>
                 <th scope="col"></th>
             </tr>
@@ -16,7 +16,7 @@
             <tr>
                 <td scope="row">{{sum @index 1}}</td>
                 <td>{{this.name}}</td>
-                <td>{{this.level}}</td>
+                <td>{{dateTransform this.createdAt}}</td>
                 <td>{{this.description}}</td>
                 <td>
                     <a href="/courses/{{this._id}}/edit" class="mr-3">Sửa</a>
@@ -27,8 +27,8 @@
             {{else}}
             <tr></tr>
             <tr class="empty-row">
-                <td colspan="5" class="text-center">Chưa có khóa học.
-                    <a href="/courses/create">Thêm mới khóa học</a>
+                <td colspan="5" class="text-center">Chưa có Video.
+                    <a href="/courses/create">Thêm mới Video</a>
                 </td>
             </tr>
             {{/each}}
@@ -46,14 +46,14 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="deletedCourseModalLabel">Xóa khóa học</h5>
+                <h5 class="modal-title" id="deletedCourseModalLabel">Xóa Video</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <p>
-                    Bạn có chắc chắn muốn xóa khóa học <strong id="course-name-label">""</strong> này đi?
+                    Bạn có chắc chắn muốn xóa Video <strong id="course-name-label">""</strong> này đi?
                 </p>
             </div>
             <div class="modal-footer">

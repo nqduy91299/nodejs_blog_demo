@@ -46,11 +46,18 @@ app.engine('hbs', handlebars({
     helpers:{
         sum: (a, b) => a + b,
         dateTransform: (date) => moment(moment.utc(date)).format('HH:mm DD/MM/YYYY'),
-        shortenString: ((string) => {
-            if(string.length > 300){
-                return string.substring(0, 300) + '...';
+        shortenString: ((string, limit) => {
+            if(Number.isInteger(limit)){
+                if(string.length > limit){
+                    return string.substring(0, limit) + '...';
+                }
+                return string
+            }else{
+                if(string.length > 300){
+                    return string.substring(0, 300) + '...';
+                }
+                return string
             }
-            return string
         })
     }
 }));

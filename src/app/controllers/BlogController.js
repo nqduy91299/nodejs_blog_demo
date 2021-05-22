@@ -1,6 +1,5 @@
 const Blog = require('../Models/Blog')
-const Comment = require('../Models/Comment')
-const { multipleMongooseToObject, mongooseToObject } = require('../../util/mongoose')
+const { mongooseToObject } = require('../../util/mongoose')
 const {validationResult} = require("express-validator");
 
 
@@ -13,7 +12,6 @@ class BlogController{
         
         Blog.findOne({slug: req.params.slug}).populate('createdBy', '-password').populate({path: "comment", populate: {path: 'createdBy'}}).select(["-__v"])
             .then((blog => {
-                console.log(mongooseToObject(blog))
                 return res.render('blog/detail', {
                     blog: mongooseToObject(blog),
                     user: user,
@@ -47,7 +45,7 @@ class BlogController{
                     if(docs){
                         const notify = {isSuccess: true, msg: 'Tạo blog mới thành công'} 
                         req.flash('notify', notify)
-                        return res.redirect('/blog')
+                        return res.redirect(`/blog/${blog.slug}`)
                     }
                     
                 })

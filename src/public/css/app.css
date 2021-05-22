@@ -8,6 +8,19 @@ h1 {
   width: 35px;
   height: 35px; }
 
+.card .card-body .card-title {
+  height: 49px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden; }
+
+.card .card-body .card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden; }
+
 .authentication a {
   margin: 0 8px;
   color: #dcdcdc; }
@@ -56,9 +69,15 @@ h1 {
   .course-detail-page .author-container img {
     width: 50px; }
 
-.blog-page .blog-card img {
-  width: 100px;
-  height: 100px; }
+.blog-page .blog-card .img_area {
+  flex: 25%; }
+  .blog-page .blog-card .img_area img {
+    max-height: 110px; }
+
+.blog-page .blog-card .sub-card {
+  flex: 75%; }
+  .blog-page .blog-card .sub-card .title a {
+    color: black; }
 
 .blog-create-page #img-preview {
   width: 150px; }

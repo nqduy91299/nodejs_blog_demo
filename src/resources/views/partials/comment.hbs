@@ -1,0 +1,26 @@
+<div class="col-12 comment-area border rounded p-3 my-3  bg-light">
+    <div class="my-comment-area border rounded d-flex p-2 mb-3">
+        <img class="rounded" src="/images/avatar_default.png" alt="">
+        <div class="px-2 d-flex flex-column w-100">
+            <div class="name font-weight-bold mb-2">{{user.name}}</div>
+            <form id="form-comment" method="POST" action="/blog/{{blog._id}}/comment/{{blog.slug}}">
+                <input class="form-control w-100 
+                " type="text" name="comment" id="comment-input" placeholder="Nhập bình luận dưới đây....">
+            </form>
+        </div>
+    </div>
+    <h4 class="">Bình luận</h4>
+    <div class="comment-post-area px-3 pt-1">
+        {{#each blog.comment}}
+        <div class="user-comment d-flex my-2 p-2 rounded border">
+            <img class="rounded" src="/images/{{this.createdBy.avatar}}" alt="">
+            <div class="px-2 d-flex flex-column w-100">
+                <div class="name font-weight-bold mb-1">{{this.createdBy.name}} 
+                    <span class="font-italic font-weight-light">{{dateTransform this.createdAt}}</span>
+                </div>
+                <span>{{this.comment}}</span>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

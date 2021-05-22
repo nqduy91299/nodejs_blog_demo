@@ -7,10 +7,17 @@
             </button>
 
             <div class="collapse navbar-collapse py-2 py-md-0" id="navbar-blog">
-                <a class="nav-link custom mb-2 mb-md-0 border-bottom" href="/blog">Blog</a>
+                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item" id="nav-item-blog">
+                        <a class="nav-link mb-2 mb-md-0"href="/">Blog</a>
+                    </li>
+                    <li class="nav-item" id="nav-item-video">
+                        <a class="nav-link mb-2 mb-md-0"href="/courses">Share Video</a>
+                    </li>
+                </ul>
                 <ul class="navbar-nav ml-auto">
                 {{#if user}}
-                    <li class="nav-item dropdown active d-flex">
+                    <li class="nav-item dropdown d-flex">
                         <img src="/images/{{user.avatar}}" alt="avatar" class="rounded-circle mr-2" id="avatar__navbar">
                         <div class="w-100">
                             <a class="nav-link dropdown-toggle" 
@@ -24,9 +31,10 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="/courses/create">Thêm Mới Khóa Học</a>
+                                <a class="dropdown-item" href="/blog/create">Thêm Mới Blog</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/me/store/courses">Khóa Học Của Tôi</a>
-                                <a class="dropdown-item" href="javascript:void(0);">Bài Viết Của Tôi</a>
+                                <a class="dropdown-item" href="/me/store/blogs">Bài Viết Của Tôi</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout">Đăng Xuất</a>
                             </div>
@@ -42,3 +50,15 @@
             </div>
     </div>
 </nav>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if(location.pathname === '/'){
+            $("#nav-item-blog").addClass('active')
+            $("#nav-item-video").removeClass('active')
+        }else if (location.pathname === '/courses'){
+            $("#nav-item-blog").removeClass('active')
+            $("#nav-item-video").addClass('active')
+        }
+    });
+</script>

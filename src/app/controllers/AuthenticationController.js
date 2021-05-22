@@ -22,7 +22,9 @@ class AuthenticationController{
                         return res.render('login', {layout: false, err: 'Đăng nhập không thành công'})
                     }else{
                         if (bcrypt.compareSync(password, user.password)){
-                            req.session.user = user
+                            req.session.user = user;
+                            const notify = {isSuccess: true, msg: 'Đăng nhập thành công'}
+                            req.flash("notify", notify)
                             return res.redirect('/');
                         }else{
                             return res.render('login', {layout: false, err: 'Đăng nhập không thành công'})

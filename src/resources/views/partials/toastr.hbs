@@ -1,0 +1,21 @@
+{{#if notify}}
+    {{#if notify.isSuccess}}
+        <div id="toastr" class="toastr fixed-bottom rounded m-2 p-2 py-lg-3 px-lg-5 bg-success text-white">
+            {{notify.msg}}
+        </div>
+    {{else}}
+        <div id="toastr" class="toastr fixed-bottom rounded m-2 p-2 py-lg-3 px-lg-5 bg-danger text-white">
+            {{notify.msg}}
+        </div>
+    {{/if}}
+{{/if}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        if($('#toastr')){
+            setTimeout(() => {
+                $('#toastr').remove()    
+            }, 3000)
+        }
+    });
+</script>

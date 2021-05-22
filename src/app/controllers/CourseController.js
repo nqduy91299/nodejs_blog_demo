@@ -1,9 +1,25 @@
 const Course = require('../Models/Course')
-const {mongooseToObject} = require('../../util/mongoose');
+const {mongooseToObject, multipleMongooseToObject} = require('../../util/mongoose');
 const { youTubeIdGet } = require('../../util/youTube');
 
 class CourseController{
 
+    index(req, res, next){
+        let user = '';
+        if(req.session?.user){
+            user = req.session?.user;
+        }
+       Course.find({})
+            .then((courses) => {
+                const notify = req.flash('notify');
+                res.render('home', {
+                    courses: multipleMongooseToObject(courses), 
+                    user, 
+                    notify: notify[0]
+                });
+            })
+            .catch(next);
+    }
     
     // [GET] /courses/:slug
     show(req, res, next){
@@ -11,7 +27,7 @@ class CourseController{
         if(req.session?.user){
             user = req.session?.user;
         }
-        Course.findOne({slug: req.params.slug})
+        Course.findOne({slug: req.params.slug}).populate('createdBy', '-password').select(["-__v"])
         .then((course) => {
             res.render('courses/show', {course: mongooseToObject(course), user})
         })
@@ -24,7 +40,11 @@ class CourseController{
         if(req.session?.user){
             user = req.session?.user;
         }
-        res.render('courses/create', {user});
+        const notify = req.flash('notify');
+        res.render('courses/create', {
+            user, 
+            notify: notify[0]
+        });
     }
 
     //[POST] /courses/store
@@ -36,7 +56,9 @@ class CourseController{
         const course = new Course(obj);
         course.save()
             .then(() => {
-                res.redirect(`/courses/${course.slug}`)
+                const notify = {isSuccess: true, msg: 'Tạo blog mới thành công'} 
+                req.flash('notify', notify)
+                return res.redirect(`/courses/${course.slug}`)
             })
             .catch(next);
 
@@ -61,6 +83,8 @@ class CourseController{
 
         Course.updateOne({_id: req.params.id}, obj)
             .then(() => {
+                const notify = {isSuccess: true, msg: "Lưu thay đổi thành công"}
+                req.flash('notify', notify);
                 res.redirect("/me/store/courses")
             })
             .catch(next);
@@ -70,6 +94,8 @@ class CourseController{
     delete(req, res, next){
         Course.delete({_id: req.params.id})
             .then(() => {
+                const notify = {isSuccess: true, msg: "Thao tác thành công"}
+                req.flash('notify', notify);
                 res.redirect("back")
             })
             .catch(next);
@@ -79,6 +105,8 @@ class CourseController{
     restore(req, res, next){
         Course.restore({_id: req.params.id})
             .then(() => {
+                const notify = {isSuccess: true, msg: "Thao tác thành công"}
+                req.flash('notify', notify);
                 res.redirect("back")
             })
             .catch(next);
@@ -87,7 +115,9 @@ class CourseController{
     // [DELETE] /courses/:id/force
     force(req, res, next){
         Course.deleteOne({_id: req.params.id})
-            .then(() => {
+            .then(() => { 
+                const notify = {isSuccess: true, msg: "Thao tác thành công"}
+                req.flash('notify', notify);
                 res.redirect("back")
             })
             .catch(next);

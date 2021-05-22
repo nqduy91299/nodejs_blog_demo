@@ -1,19 +1,21 @@
-const Course = require('../Models/Course')
-const {multipleMongooseToObject} = require('../../util/mongoose')
+const {multipleMongooseToObject} = require('../../util/mongoose');
+const Blog = require('../Models/Blog');
 
 class SiteController{
 
     // [GET] /
     index(req, res, next){
-        let user = '';
-        if(req.session?.user){
-            user = req.session?.user;
-        }
-       Course.find({})
-            .then((courses) => {
-                res.render('home', {courses: multipleMongooseToObject(courses), user})
-            })
-            .catch(next);
+        const notify = req.flash('notify');
+
+        Blog.find({}).populate('createdBy', '-password').select(["-__v"])
+            .then((blogs => {
+                return res.render('blog', {
+                    blogs: multipleMongooseToObject(blogs),
+                    user: req.session?.user,
+                    notify: notify[0]
+                })
+            })) 
+            .catch(next)
     }
 
     // [GET] /search

@@ -1,0 +1,28 @@
+<div class="row py-3 blog-page px-2">
+    {{#each blogs}}
+        <div class="col-12 blog-card border rounded border p-2 d-flex my-1">
+            <img class="rounded" src="/images/{{this.image}}" alt="">
+            <div class="ml-2">
+                <div class="title ">
+                    <span class="font-weight-bold mr-3">
+                        {{this.title}}
+                    </span>
+                    <span class="font-italic">from {{this.createdBy.name}}</span>
+                    <span class="font-italic">- {{dateTransform this.createdAt}}</span>
+                </div>
+                <div id="content" class="content ellipsis"> 
+                    {{shortenString this.content}}
+                    <a href="/blog/{{this.slug}}">Đọc thêm</a>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        <div class="col-12 text-center font-italic">Chưa có blog nào</div>
+    {{/each}}
+</div>
+
+<script>
+    
+    //document.addEventListener('DOMContentLoaded', () => {
+    //});
+</script>

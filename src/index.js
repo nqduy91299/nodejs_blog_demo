@@ -6,7 +6,8 @@ const methodOverride = require('method-override')
 const handlebars =  require('express-handlebars');
 const port = process.env.PORT || 2020;
 const session = require('express-session');
-
+const moment = require('moment');
+const flash = require('connect-flash')
 
 const route = require('./routes');
 const db = require('./config/db');
@@ -18,8 +19,11 @@ app.use(session({
     secret: 'secret-key-blog',
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 600000 }
-  }))
+    cookie: { maxAge: 1000*60*60*24 }
+}))
+
+// Init flash-message
+app.use(flash())
 
 app.use('/images',express.static(path.join(__dirname, 'public', 'img')));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,6 +45,13 @@ app.engine('hbs', handlebars({
     extname: 'hbs',
     helpers:{
         sum: (a, b) => a + b,
+        dateTransform: (date) => moment(moment.utc(date)).format('HH:mm DD/MM/YYYY'),
+        shortenString: ((string) => {
+            if(string.length > 300){
+                return string.substring(0, 300) + '...';
+            }
+            return string
+        })
     }
 }));
 app.set('view engine', 'hbs');

@@ -7,8 +7,6 @@ const User = new Schema({
     password: {type: String},
     username: {type: String},
     avatar: {type: String},
-    
-    
     /*
     * @role user:
     * 0 => admin

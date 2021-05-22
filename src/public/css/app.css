@@ -1,6 +1,9 @@
 h1 {
   color: red; }
 
+.text-black {
+  color: black; }
+
 #avatar__navbar {
   width: 35px;
   height: 35px; }
@@ -12,10 +15,11 @@ h1 {
     color: #ffffff;
     text-decoration: none; }
 
-.nav-link.custom {
-  color: #e9e9e9; }
-  .nav-link.custom:hover {
-    color: #c6c6c6; }
+.nav-item.active a {
+  border-bottom: 1px solid #f3f3f3; }
+
+.toastr {
+  width: fit-content; }
 
 .table-striped tbody tr td:nth-child(1) {
   width: 5%; }
@@ -31,3 +35,42 @@ h1 {
 
 .table-striped tbody tr td:nth-child(5) {
   width: 10%; }
+
+.table-blogs tbody tr td:nth-child(1) {
+  width: 5%; }
+
+.table-blogs tbody tr td:nth-child(2):not(.empty-row) {
+  width: 25%; }
+
+.table-blogs tbody tr td:nth-child(3) {
+  width: 50%; }
+
+.table-blogs tbody tr td:nth-child(4) {
+  width: 10%; }
+
+.table-blogs tbody tr td:nth-child(5) {
+  width: 15%; }
+
+.course-detail-page .author-container {
+  background: #e0e0e0; }
+  .course-detail-page .author-container img {
+    width: 50px; }
+
+.blog-page .blog-card img {
+  width: 100px;
+  height: 100px; }
+
+.blog-create-page #img-preview {
+  width: 150px; }
+
+.comment-area .my-comment-area img,
+.comment-area .user-comment img {
+  width: 75px;
+  height: 75px; }
+
+.comment-area .comment-post-area .user-comment img {
+  width: 55px;
+  height: 55px; }
+
+.comment-area .comment-post-area .user-comment .name {
+  font-size: 15px; }

@@ -7,6 +7,12 @@ h1 {
   color: black;
 }
 
+.sub-header {
+  * {
+    font-size: 13px;
+  }
+}
+
 #avatar__navbar {
   width: 35px;
   height: 35px;
@@ -155,5 +161,49 @@ h1 {
         font-size: 15px;
       }
     }
+  }
+}
+
+.img-input-preview {
+  position: relative;
+  width: fit-content;
+
+  img {
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  input {
+    position: absolute;
+    width: 0;
+    top: 0;
+    left: 0;
+  }
+
+  &:hover {
+    label {
+      display: flex;
+      position: absolute;
+      background-color: rgba(0, 0, 0, 0.4);
+      left: 0%;
+      top: 0%;
+      width: 100%;
+      height: 100%;
+      color: white;
+      cursor: pointer;
+      text-align: center;
+      align-content: center;
+
+      span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+  label {
+    display: none;
   }
 }
